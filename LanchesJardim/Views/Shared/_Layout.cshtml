@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LanchesJardim</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm " navbar navbar-dark" style="background-color: #6F0000;" border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">LanchesJardim</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    @await Component.InvokeAsync("CategoriaMenu")
+                    <form class="navbar-form navbar-right" asp-controller="Lanche" asp-action="Search" method="get">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Procurar lanche" name="searchString" value="@ViewData["searchString"]">
+                        </div>
+                    </form>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @await Component.InvokeAsync("CarrinhoCompraResumo")
+                    }
+                    @await Html.PartialAsync("_LoginPartial")
+                    <a class="nav-link text-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Admin" asp-action="Index">Admin</a>
+                    }
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <p> &copy; 2021 - LanchesJardim -<a target="_blank" href="kauajardim2004@hotmail.com"></a></p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
