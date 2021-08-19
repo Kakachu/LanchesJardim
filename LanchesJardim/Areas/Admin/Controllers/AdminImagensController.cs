@@ -54,7 +54,7 @@ namespace LanchesJardim.Areas.Admin.Controllers
             foreach (var formFile in files)
             {
                 if (formFile.FileName.Contains(".jpg") || formFile.FileName.Contains(".gif")
-                    || formFile.FileName.Contains(".png"))
+                    || formFile.FileName.Contains(".png") || formFile.FileName.Contains(".jpeg"))
                 {
                     var fileNameWithPath = string.Concat(filePath, "\\", formFile.FileName);
 
